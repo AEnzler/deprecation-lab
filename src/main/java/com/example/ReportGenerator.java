@@ -4,8 +4,7 @@ import java.util.Date;
 
 /**
  * Builds a simple report and Base64-encodes it.
- * Demonstrates:
- *   Deprecated API usage (Date.getYear())
+ *
  * <p><strong>Context:</strong>
  * The ReportGenerator currently uses Date.getYear() (deprecated since JDK 1.1,
  *  returns year-1900).</p>
