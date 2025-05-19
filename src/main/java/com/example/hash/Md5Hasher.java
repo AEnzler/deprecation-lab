@@ -6,15 +6,10 @@ import java.security.MessageDigest;
 /**
  * Legacy MD5 hasher.
  *
- * <p><strong>Context:</strong>
- * MD5 was once used widely, including inside older JDK utilities, but is now
- * considered insecure for passwords. This class shows an existing “bad” API
- * you must deprecate and replace.</p>
- *
- *  TODO: Add deprecation annotation and documentation.
- *      1) Annotate the class with @Deprecated(forRemoval=true, since="1.0")
- *      2) Add a {@deprecated} Javadoc tag pointing to Sha256Hasher.
+ * @deprecated since 1.0, for removal.
+ *  Use {@link Sha256Hasher} instead.
  */
+@Deprecated(forRemoval = true, since="1.0")
 public class Md5Hasher implements PasswordHasher {
 
     /**

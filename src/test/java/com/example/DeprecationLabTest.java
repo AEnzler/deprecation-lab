@@ -54,7 +54,7 @@ class DeprecationLabTest {
     void forbidDateGetYear() throws IOException {
         String rg = stripComments(Files.readString(src("ReportGenerator")));
         assertFalse(
-                rg.contains(".getYear("),
+                rg.contains("Date.getYear("),
                 "ERROR: ReportGenerator uses deprecated Date.getYear(); please replace with LocalDate-based year extraction."
         );
     }

@@ -5,12 +5,6 @@ import java.security.MessageDigest;
 
 /**
  * Simple SHA-256 hasher.
- *
- * <p><strong>Context:</strong>
- * SHA-256 offers strong, collision-resistant hashing, suitable for
- * password storage when combined with salt and work factors.</p>
- *
- * <p>This class replaces {@link Md5Hasher} in the lab.</p>
  */
 public class Sha256Hasher implements PasswordHasher {
 

@@ -7,18 +7,13 @@ import com.example.hash.PasswordHasher;
 /**
  * Authentication service.
  *
- * <p><strong>Context:</strong>
- * Existing code uses {@link Md5Hasher}, which is insecure.
- * Your job is to swap it out for {@link Sha256Hasher}.</p>
- *
  * <p>This example uses a hard‐coded “password123” hash to simulate
  * user lookup in a database. In real code, you’d fetch the stored
  * hash+salt from a secure store.</p>
  *
- * TODO: Replace insecure Md5Hasher with Sha256Hasher.
  */
 public class AuthService {
-    private final PasswordHasher hasher = new Md5Hasher();
+    private final PasswordHasher hasher = new Sha256Hasher();
 
     /**
      * Validate the given password against the stored hash.

@@ -11,34 +11,49 @@ public class Main {
     public static void main(String[] args) throws Exception {
         boolean allGood = true;
 
+        try {
+            Class<?> md5 = Class.forName("com.example.hash.Md5Hasher");
+            if (!md5.isAnnotationPresent(Deprecated.class)) {
+                System.err.println("[STEP 1] WARNING: Md5Hasher is not annotated @Deprecated; add @Deprecated(forRemoval=true, since=\"1.0\").");
+                allGood = false;
+            } else {
+                System.out.println("[STEP 1] OK: Md5Hasher is annotated @Deprecated.");
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("[STEP 1] WARNING: Md5Hasher class not found.");
+            allGood = false;
+        }
+
         // STEP 1: Hasher check
         AuthService auth = new AuthService();
         String hasher = auth.getHasherName();
         if ("Md5Hasher".equals(hasher)) {
-            System.err.println("[STEP 1] WARNING: AuthService is still using Md5Hasher. Please switch to Sha256Hasher.");
+            System.err.println("[STEP 2] WARNING: AuthService is still using Md5Hasher. Please switch to Sha256Hasher.");
             allGood = false;
         } else {
-            System.out.println("[STEP 1] OK: AuthService uses " + hasher + ".");
+            System.out.println("[STEP 2] OK: AuthService uses " + hasher + ".");
         }
 
         // STEP 2: ReportGenerator checks
         String rgSrc = Files.readString(RG);
         String rgClean = rgSrc.replaceAll("(?s)/\\*.*?\\*/", "").replaceAll("//.*", "");
 
-        if (rgClean.contains(".getYear(")) {
-            System.err.println("[STEP 2] WARNING: ReportGenerator is still calling Date.getYear(), which is deprecated. Replace with LocalDate.now().getYear().");
+        if (!rgClean.contains("LocalDate.now().getYear()")) {
+            System.err.println("[STEP 3] WARNING: ReportGenerator must use LocalDate.now().getYear().");
             allGood = false;
+        } else {
+            System.out.println("[STEP 3] OK: ReportGenerator uses LocalDate.");
         }
 
         // STEP 3: XmlService import check
         String xsSrc = Files.readString(XS);
         if (xsSrc.contains("import javax.xml.bind")) {
-            System.err.println("[STEP 3] WARNING: XmlService still imports javax.xml.bind.DatatypeConverter. Please migrate to jakarta.xml.bind.DatatypeConverter.");
+            System.err.println("[STEP 4] WARNING: XmlService still imports javax.xml.bind.DatatypeConverter. Please migrate to jakarta.xml.bind.DatatypeConverter.");
             allGood = false;
         } else if (xsSrc.contains("import jakarta.xml.bind.DatatypeConverter")) {
-            System.out.println("[STEP 3] OK: XmlService imports jakarta.xml.bind.DatatypeConverter.");
+            System.out.println("[STEP 4] OK: XmlService imports jakarta.xml.bind.DatatypeConverter.");
         } else {
-            System.err.println("[STEP 3] WARNING: XmlService missing import for jakarta.xml.bind.DatatypeConverter.");
+            System.err.println("[STEP 4] WARNING: XmlService missing import for jakarta.xml.bind.DatatypeConverter.");
             allGood = false;
         }
 
