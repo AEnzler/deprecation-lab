@@ -33,6 +33,7 @@
    ./mvnw compile exec:java
    ```
 6. **Commit & Push** your code to your **fork**
+7. **Watch** the CI check on your GitHub fork turn green ✅
 ---
 
 ## 🛠️ GitHub Actions & CI
@@ -42,7 +43,7 @@
 2. Annotate any test failures in your push
 3. Fail the build if there are errors
 * Every push triggers the CI.
-* Goal: green checks ✅ before merging.
+* Goal: green checks ✅
 
 ---
 
@@ -53,7 +54,3 @@ To get your environment ready before diving into the tasks, follow these steps:
 - **Maven wrapper:** The project includes mvnw (Unix) and mvnw.cmd (Windows) scripts so you don’t need a local Maven installation. Use ./mvnw or mvnw.cmd to run Maven commands with the exact version specified in .mvn/wrapper/maven-wrapper.properties.
 
 - **IDE configuration:** Open the project as a Maven project in your favorite IDE (IntelliJ IDEA, Eclipse, VS Code). The IDE will automatically download dependencies, configure JUnit 5 support, and index source files so you can navigate and refactor easily.
-
-- **CI annotations:**:
-   * **Tests** fail if functionality or deprecation rules are not met.
-   * **TODO warnings** appear as yellow annotations — fix those TODO comments to clean up the exercise.
