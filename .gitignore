@@ -1,0 +1,11 @@
+target/
+out/
+!.mvn/wrapper/**
+.idea/
+.vscode/
+.settings/
+*.log
+.project
+.classpath
+.DS_Store
+Thumbs.db
